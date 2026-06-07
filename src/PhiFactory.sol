@@ -417,10 +417,10 @@ contract PhiFactory is Initializable, UUPSUpgradeable, Ownable2StepUpgradeable, 
         emit ProtocolFeeDestinationSet(protocolFeeDestination_);
     }
 
-    /// @notice Sets the protocol fee percentage.
+    /// @notice Sets the protocol fee percentage. Capped at 10% (1000 BPS).
     /// @param protocolFee_ The new protocol fee percentage (in basis points).
     function setProtocolFee(uint256 protocolFee_) external onlyOwner {
-        if (protocolFee_ > 10_000) revert ProtocolFeeTooHigh();
+        if (protocolFee_ > 1_000) revert ProtocolFeeTooHigh();
         mintProtocolFee = protocolFee_;
         emit ProtocolFeeSet(protocolFee_);
     }
